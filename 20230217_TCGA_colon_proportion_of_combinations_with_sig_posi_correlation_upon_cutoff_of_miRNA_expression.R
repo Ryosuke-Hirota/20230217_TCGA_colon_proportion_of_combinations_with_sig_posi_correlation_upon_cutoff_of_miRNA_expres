@@ -60,8 +60,10 @@ dev.off()
 for (i in 1:length(cutoff)) {
   cutoff.df <-mean.zero.df[mean.zero.df[,8]<=cutoff[i],]
   pdf(paste0("volcano_plot_about_TCGA_colon_correlation_between_expression_of_transcript_and_miRNA_cutoff_",cutoff[i],".pdf"))
-  plot(cutoff.df[,3],-log10(cutoff.df[,4]),col=cutoff.df[,9],pch=19,xlab = "correlation coefficient",ylab = "-log10(p.value)")
+  plot(cutoff.df[,3],-log10(cutoff.df[,4]),col=cutoff.df[,9],pch=19,xlab = "correlation coefficient",ylab = "-log10(p.value)",
+       main = paste0("sig.posi.cor = ",nrow(cutoff.df[cutoff.df[,9]=="red",])," other = ",nrow(cutoff.df)-nrow(cutoff.df[cutoff.df[,9]=="red",])))
   abline(h=1.30103,v=0,lty=2)
   legend("topleft",legend =c("other","r>0, p<0.05"),col=unique(cutoff.df[,9]),pch=19)
   dev.off()
 }
+
