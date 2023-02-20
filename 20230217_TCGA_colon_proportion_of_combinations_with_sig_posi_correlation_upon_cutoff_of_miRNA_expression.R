@@ -1,4 +1,4 @@
-# This script is to draw line graph about percentage of combinations with significant positive correlation upon cutoff miRNA and transcript expression  
+# This script is to draw line graph about percentage of combinations with significant positive correlation upon cutoff miRNA expression and number of samples without expression  
 # 2023/02/17 made
 
 # make new directory
