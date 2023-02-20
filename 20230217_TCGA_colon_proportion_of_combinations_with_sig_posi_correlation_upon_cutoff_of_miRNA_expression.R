@@ -29,15 +29,12 @@ zero.sample.df <-zero.sample.df[,c(1,2,8)]
 
 # merge table about mean and table about number of samples witout expression
 mean.zero.df <-merge(mean.df,zero.sample.df,by=c("miRNA","transcript"))
-
-# add color information
-mean.zero.df[mean.zero.df[,3]>0&mean.zero.df[,4]<0.05,9] <-"red"
-mean.zero.df[mean.zero.df[,3]<=0|mean.zero.df[,4]>=0.05,9] <-"black"
+mean.zero.df <-mean.zero.df[,c(1:7,9,8)]
 
 # set cutoff value for number of sample without expression level
 cutoff <-seq(0,280,20)
 
-# make table for wirtting percentage
+# make table for writing percentage
 sm <-as.data.frame(matrix(nrow = length(cutoff),ncol = 5))
 
 # calculate percentage upon cutoff miRNA expression and number of samples without expression
@@ -59,7 +56,7 @@ text(sm[,1],sm[,4], paste0(sm[,2],"/",sm[,3]), adj=c(0.5,-0.5),cex = 0.6)
 text(sm[,1],sm[,4]+0.1, sm[,5], pos=3,cex = 0.6)
 dev.off()
 
-# draw valcano plot
+# draw volcano plot
 for (i in 1:length(cutoff)) {
   cutoff.df <-mean.zero.df[mean.zero.df[,8]<=cutoff[i],]
   pdf(paste0("volcano_plot_about_TCGA_colon_correlation_between_expression_of_transcript_and_miRNA_cutoff_",cutoff[i],".pdf"))
